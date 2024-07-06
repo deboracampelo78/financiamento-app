@@ -1,0 +1,52 @@
+<mat-card fxFlex>
+    <mat-card-title>Formulário de Contrato </mat-card-title>
+
+
+<mat-card-content> 
+    <div fxLayout="column" fxLayoutAlign="sapace-between">
+        <mat-form-field>
+            <mat-hint>Contrato Atrasado?</mat-hint>
+            <input matInput [(ngModel)]="ematraso">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-hint>Contrato Denro do Prazo?</mat-hint>
+            <input matInput [(ngModel)]="noprazo">
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-hint>Contrato Pago?</mat-hint>
+            <input matInput [(ngModel)]="pago">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-hint>Contrato Cancelado?</mat-hint>
+            <input matInput [(ngModel)]="cancelado">
+        </mat-form-field>
+        <div fxLayout="row">
+            <button mat-button color="primary">Salvar</button>
+            <button mat-button color="warn">Cancelar</button>
+        </div>
+    </div>
+
+    <mat-list>
+
+        <h3 mat-subheader>Contratos</h3>
+
+        <mat-list-item *ngFor="let co of contratos">
+            <div>
+                Número:{{co._id}} - 
+                Atrazado? {{co.ematraso}} - 
+                No Prazo? {{co.noprazo}} - 
+                Pago? {{co.pago}} - 
+                Cancelado? {{co.cancelado}}
+                <button mat-icon-button color="accent">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button color="primary">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+           
+        </mat-list-item>   
+    </mat-list>
+</mat-card-content>
+</mat-card>
