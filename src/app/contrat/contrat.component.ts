@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contrat } from '../contrat';
+import { ContratService } from '../contrat.service';
 
 @Component({
   selector: 'app-contrat',
@@ -13,25 +14,43 @@ export class ContratComponent implements OnInit{
   pago: string = '';
   cancelado: string = '';
 
-  contratos:Contrat[] = [
-    { _id:'0', ematraso:"sim", noprazo:"não", pago:"não", cancelado:"sim"},
-    {_id:'1', ematraso:"sim", noprazo:"não", pago:"não", cancelado:"sim"}
-  ];
+  contratos:Contrat[] = [];
 
-  constructor() { }
+  constructor(private contratService:ContratService) { }
 
   ngOnInit() {
-
+    this.contratService.get()
+    .subscribe((co) => this.contratos = co);
   }
 
-  save(){
+  save(){ 
+    this.contratService.add(
+      {ematraso: this.ematraso, 
+        noprazo: this.noprazo, 
+        pago: this.pago, 
+        cancelado: this.cancelado}).subscribe(
+          (co) => {
+            console.log(co);
+            this.clearFields();
 
+          },
+          (err) => console.error(err))
+  }
+  clearFields(){
+    this.ematraso = "";
+    this.noprazo = "";
+    this.cancelado = "";
+    this.pago = "";
   }
   cancel(){
 
   }
-  edit(){
-    
+  edit(co:Contrat){
+
+  }
+
+  delete(co:Contrat){
+
   }
 
 }
