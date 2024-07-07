@@ -86,7 +86,7 @@ export class ContratComponent implements OnInit {
   delete(co: Contrat) {
     this.contratService.del(co)
       .subscribe(
-        (co) => this.notify('Removed!'),
+        () => this.notify('Removed!'),
         (err) => console.log(err)
       )
 
