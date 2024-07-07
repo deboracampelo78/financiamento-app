@@ -11,6 +11,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list'; // Adicione esta linha
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -30,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCardModule,
     MatButtonModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }
