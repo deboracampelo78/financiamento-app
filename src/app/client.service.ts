@@ -52,12 +52,9 @@ export class ClientService {
     }    
     
     add(c: Client): Observable<Client> {
-      //let contratos = Array.isArray(c.contrato) ? c.contrato.map(co => c._id) : [];
-      
       return this.http.post<Client>(this.url, { ...c })
         .pipe(
           tap((ci) => {
-            // Atualiza o subject com o novo cliente
             let currentClients = this.clienteSubject$.getValue();
             currentClients.push({ ...c, _id: ci._id });
             this.clienteSubject$.next(currentClients);

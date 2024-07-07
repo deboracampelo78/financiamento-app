@@ -4,13 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Client } from '../client';
 import { ContratService } from '../contrat.service';
 import { Contrat } from '../contrat';
-import { Subject, takeUntil } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
-  styleUrl: './client.component.css'
+  styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
 
@@ -19,63 +18,69 @@ export class ClientComponent implements OnInit {
     cpf: ['', [Validators.required]],
     name: ['', [Validators.required]],
     contratos: [[], [Validators.required]],
-  })
+  });
 
   clientes: Client[] = [];
   contratos: Contrat[] = [];
   depCliente: Client | null = null;
 
-  private unsubscribe$: Subject<any> = new Subject<any>();
-
   constructor(
     private clienteService: ClientService,
     private formBuilder: FormBuilder,
     private contratoService: ContratService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar
+  ) { }
 
-    ngOnInit() {
-      this.clienteService.get()
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((cli) => {
-          this.clientes = cli;
-        });
-      this.contratoService.get()
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((co) => {
-          this.contratos = co;
-        });
-    }
-    
-
-  ngOnDestroy() {
-    this.unsubscribe$.next(null);
-    this.unsubscribe$.complete();
+  ngOnInit() {
+    this.clienteService.get()
+      .subscribe((cli) => this.clientes = cli);
+    this.contratoService.get()
+      .subscribe((co) => this.contratos = co);
   }
 
   getContratos(ci: Client): Contrat[] {
-    return Array.isArray(ci.contrato) ? ci.contrato as Contrat[] : [];
+    return Array.isArray(ci.contrato) && typeof ci.contrato[0] !== 'string' ? ci.contrato as Contrat[] : [];
   }
 
   save() {
-    let data = this.clientForm.value;
+    const data = this.clientForm.value;
     if (data._id != null) {
-      this.clienteService.update(data).subscribe();
-    }
-    else {
-      this.clienteService.add(data).subscribe();
+      this.clienteService.update(data).subscribe((updatedClient) => {
+        const index = this.clientes.findIndex(c => c._id === updatedClient._id);
+        if (index > -1) {
+          this.clientes[index] = updatedClient;
+        }
+        this.notify('Client updated!');
+      });
+    } else {
+      this.clienteService.add(data).subscribe((newClient) => {
+        this.clientes.push(newClient);
+        this.notify('Client added!');
+      });
     }
   }
 
-  delete(ci:Client) {
+  delete(ci: Client) {
     this.clienteService.del(ci)
-    .subscribe(
-      () => this.notify('Removed!'),
-      (err) => console.log(err)
-    )
+      .subscribe(() => {
+        this.clientes = this.clientes.filter(c => c._id !== ci._id);
+        this.notify('Removed!');
+      }, (err) => console.log(err));
   }
 
-  edit(ci:Client) {
-    this.clientForm.setValue(ci);
+  edit(ci: Client) {
+    const contratos = Array.isArray(ci.contrato)
+      ? typeof ci.contrato[0] === 'string'
+        ? this.contratos.filter(c => (ci.contrato as string[]).includes(c._id!))
+        : ci.contrato as Contrat[]
+      : [];
+
+    this.clientForm.setValue({
+      _id: ci._id || null,
+      cpf: ci.cpf || '',
+      name: ci.name || '',
+      contratos: contratos
+    });
     this.depCliente = ci;
   }
 
@@ -83,5 +88,14 @@ export class ClientComponent implements OnInit {
     this.snackBar.open(msg, "OK", { duration: 3000 });
   }
 
-
+  cancel() {
+    this.clientForm.reset({
+      _id: null,
+      cpf: '',
+      name: '',
+      contratos: []
+    });
+    this.depCliente = null;
+  }
+  
 }
