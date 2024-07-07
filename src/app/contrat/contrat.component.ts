@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./contrat.component.css']
 })
 export class ContratComponent implements OnInit {
-
+  name: string = '';
   ematraso: string = '';
   noprazo: string = '';
   pago: string = '';
@@ -31,6 +31,7 @@ export class ContratComponent implements OnInit {
   if (this.contratEdit) {
     this.contratService.update({
       _id: this.contratEdit._id,
+      name: this.name,
       ematraso: this.ematraso,
       noprazo: this.noprazo,
       pago: this.pago,
@@ -46,6 +47,7 @@ export class ContratComponent implements OnInit {
     )
   } else {
     this.contratService.add({
+      name: this.name,
       ematraso: this.ematraso,
       noprazo: this.noprazo,
       pago: this.pago,
@@ -61,6 +63,7 @@ export class ContratComponent implements OnInit {
 
 
   clearFields() {
+    this.name = '';
     this.ematraso = '';
     this.noprazo = '';
     this.cancelado = '';
@@ -72,6 +75,7 @@ export class ContratComponent implements OnInit {
   }
 
   edit(co: Contrat) {
+    this.name = co.name;
     this.ematraso = co.ematraso;
     this.noprazo = co.noprazo;
     this.pago = co.pago;

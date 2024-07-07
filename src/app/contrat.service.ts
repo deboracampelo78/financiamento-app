@@ -8,7 +8,7 @@ import { Contrat } from './contrat';
 })
 export class ContratService {
 
-  readonly url = 'http://localhost:3000/contrato'
+  readonly url = 'http://localhost:3000/contrato';
 
   private contratoSubject$: BehaviorSubject<Contrat[]> = new BehaviorSubject<Contrat[]>([]);
   private loaded: boolean = false;
@@ -53,6 +53,7 @@ export class ContratService {
           let contrats = this.contratoSubject$.getValue();
           let i = contrats.findIndex(c => c._id === updatedCo._id);
           if (i >= 0) {
+            contrats[i].name = updatedCo.name;
             contrats[i].ematraso = updatedCo.ematraso;
             contrats[i].noprazo = updatedCo.noprazo;
             contrats[i].cancelado = updatedCo.cancelado;

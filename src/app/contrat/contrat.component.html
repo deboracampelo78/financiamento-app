@@ -3,6 +3,10 @@
 <mat-card-content> 
     <div fxLayout="column" fxLayoutAlign="sapace-between">
         <mat-form-field>
+            <mat-hint>Título do Contrato?</mat-hint>
+            <input matInput [(ngModel)]="name">
+        </mat-form-field>
+        <mat-form-field>
             <mat-hint>Contrato Atrasado?</mat-hint>
             <input matInput [(ngModel)]="ematraso">
         </mat-form-field>
@@ -31,6 +35,7 @@
 
         <mat-list-item *ngFor="let co of contratos">
             <div>
+                Título {{co.name}} - 
                 Atrasado? {{co.ematraso}} - 
                 Prazo? {{co.noprazo}} - 
                 Pago? {{co.pago}} - 
