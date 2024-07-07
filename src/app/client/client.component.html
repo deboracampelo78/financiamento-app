@@ -1,1 +1,60 @@
-<p>client works!</p>
+<mat-card fxFlex>
+    <mat-card-title>Formulário de Cliente </mat-card-title>
+    <mat-card-content> 
+      <form [formGroup]="clientForm" (ngSubmit)="save()" fxLayout="column" fxLayoutAlign="sapace-between">
+        <input type="hidden" formControlName="_id">
+  
+        <mat-form-field>
+          <mat-hint>Cpf</mat-hint>
+          <input matInput placeholder="Cpf do Cliente" formControlName="cpf">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-hint>Nome</mat-hint>
+          <input matInput placeholder="Nome do Cliente" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contratos</mat-label>
+                <mat-select formControlName="contratos" multiple>
+                    <mat-select-trigger>
+                    {{ clientForm.value.contratos ? clientForm.value.contratos[0]?.name : '' }}
+                        <span *ngIf="clientForm.value.contratos.length > 1" class="additional-selection"></span>
+                        <span class="example-additional-selection">
+                            (+{{ clientForm.value.contratos.length - 1 }} {{ clientForm.value.contratos.length === 2 ? 'other' : 'others' }})
+                         </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let co of contratos" [value]="co._id">{{ co.name }}</mat-option>
+                </mat-select>
+        </mat-form-field>
+  
+        <div fxLayout="row">
+          <button mat-button color="primary" type="submit">Salvar</button>
+          <button mat-button color="warn" type="reset">Cancelar</button>
+        </div>
+      </form>
+  
+      <ng-container *ngIf="clientes.length > 0; else empty">
+        <mat-list>
+			<h3 mat-subheader>Clientes</h3>
+        <mat-list-item *ngFor="let ci of clientes">
+            <div>
+				Cpf: {{ci.cpf}} - 
+				Nome: {{ci.name}} - 
+				 Contratos: 
+						<mat-chip *ngFor="let co of contratos">{{co.name}}</mat-chip>
+                        <button mat-icon-button color="accent" (click)="delete(ci)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" (click)="edit(ci)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+            </div>
+        </mat-list-item>   
+    </mat-list>
+      </ng-container>
+      <ng-template #empty>
+        <div><em>Empty</em></div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+  

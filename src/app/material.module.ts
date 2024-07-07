@@ -12,8 +12,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list'; // Adicione esta linha
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+import { MatChipsModule } from '@angular/material/chips'; 
 
 @NgModule({
   exports: [
@@ -32,7 +31,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatListModule,
     FlexLayoutModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule { }
