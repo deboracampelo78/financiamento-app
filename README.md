@@ -4,6 +4,13 @@ Aplicação para Locação de Imóveis
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 18.0.7.
 
+## Tecnologias usadas
+
+- Mongo DB
+- Node.js
+- Angular/TypeScript
+- Angular/Material para interface
+
 ## Requisitos para rodar em sua máquina
 
 1. Instalar o Node.js
