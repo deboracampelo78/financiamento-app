@@ -6,16 +6,16 @@ Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli
 
 ## Tecnologias usadas
 
-- Mongo DB
-- Node.js
+- Mongo DB - mongoose
+- Node.js - para requisições
 - Angular/TypeScript
 - Angular/Material para interface
 
 ## Requisitos para rodar em sua máquina
 
-1. Instalar o Node.js
-2. Instalar o MongoDB
-3. Instalar o Git Bash
+1. Instalar o [Node.js](https://nodejs.org/en/download/)
+2. Instalar o [MongoDB](https://www.mongodb.com/try/download/community)
+3. Instalar o [Git Bash](https://git-scm.com/downloads)
 
 ## Instruções para configurar o projeto
 
