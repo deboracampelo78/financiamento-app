@@ -35,9 +35,9 @@
         <h3 mat-subheader>Clientes</h3>
         <mat-list-item *ngFor="let ci of clientes">
           <div>
-            <mat-chip>Cpf: {{ci.cpf}}</mat-chip> -
-            <mat-chip>Nome: {{ci.name}}</mat-chip> -
-            <mat-chip *ngFor="let co of getContratos(ci)">Contratos: {{ciContrat}}</mat-chip>
+            <mat-chip>Cpf: {{ ci.cpf }}</mat-chip> -
+            <mat-chip>Nome: {{ ci.name }}</mat-chip> -
+            <mat-chip *ngFor="let contratoName of getContratos(ci)">Contrato: {{ contratoName }}</mat-chip>
             <button mat-icon-button color="accent" (click)="delete(ci)">
               <mat-icon>delete</mat-icon>
             </button>
@@ -46,6 +46,7 @@
             </button>
           </div>
         </mat-list-item>
+        
       </mat-list>
     </ng-container>
     <ng-template #empty>

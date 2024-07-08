@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
+[x: string]: any;
 
   clientForm: FormGroup = this.formBuilder.group({
     _id: [null],
@@ -39,10 +40,20 @@ export class ClientComponent implements OnInit {
       .subscribe((co) => this.contratos = co);
   }
 
-  getContratos(cliente: any){
-    this.ciContrat = cliente.contratos || [];
-    return this.ciContrat;
+  getContratos(cliente: any): string[] {
+    const contratoIds: string[] = cliente.contratos || [];
+    const nomesContratos: string[] = [];
+  
+    contratoIds.forEach(id => {
+      const contrato = this.contratos.find(c => c._id === id);
+      if (contrato) {
+        nomesContratos.push(contrato.name);
+      }
+    });
+  
+    return nomesContratos;
   }
+  
 
   save() {
     const data = this.clientForm.value;
