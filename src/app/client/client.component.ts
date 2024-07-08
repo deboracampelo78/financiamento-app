@@ -64,15 +64,27 @@ export class ClientComponent implements OnInit {
           this.clientes[index] = updatedClient;
         }
         this.notify('Client updated!');
+        this.clearFields();
       });
     } else {
       this.clienteService.add(data).subscribe((newClient) => {
         this.clientes.push(newClient);
         this.notify('Client added!');
+        this.clearFields();
       });
     }
   }
 
+  clearFields() {
+    this.clientForm.reset({
+      _id: null,
+      cpf: '',
+      name: '',
+      contratos: []
+    });
+    this.depCliente = null;
+  }
+  
   delete(ci: Client) {
     this.clienteService.del(ci)
       .subscribe(() => {
