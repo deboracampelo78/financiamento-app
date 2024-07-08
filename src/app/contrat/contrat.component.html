@@ -45,25 +45,28 @@
     </div>
 
     <mat-list>
-
-        <h3 mat-subheader>Contratos</h3>
-
-        <mat-list-item *ngFor="let co of contratos">
-            <div>
-                <mat-chip>Título {{co.name}}</mat-chip> - 
-                <mat-chip>Atrasado? {{co.ematraso}}</mat-chip> - 
-                <mat-chip>Prazo? {{co.noprazo}}</mat-chip> - 
-                <mat-chip>Pago? {{co.pago}}</mat-chip> - 
-                <mat-chip>Cancelado? {{co.cancelado}}</mat-chip>
-                <button mat-icon-button color="accent" (click)="delete(co)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button mat-icon-button color="primary" (click)="edit(co)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </div>
-           
-        </mat-list-item>   
-    </mat-list>
+      <h3 mat-subheader>Contratos</h3>
+      <ng-container *ngFor="let co of contratos">
+          <mat-list-item>
+              <div>
+                  <mat-chip>Título {{co.name}}</mat-chip> -
+                  <mat-chip>Atrasado? {{co.ematraso}}</mat-chip> -
+                  <mat-chip>Prazo? {{co.noprazo}}</mat-chip> -
+                  <ng-container *ngIf="co.pago === 'Sim'">
+                      <mat-chip-option selected>Pago? {{co.pago}}</mat-chip-option> -
+                  </ng-container>
+                  <mat-chip>Cancelado? {{co.cancelado}}</mat-chip>
+                  <button mat-icon-button color="accent" (click)="delete(co)">
+                      <mat-icon>delete</mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" (click)="edit(co)">
+                      <mat-icon>edit</mat-icon>
+                  </button>
+              </div>
+          </mat-list-item>
+      </ng-container>
+  </mat-list>
+  
+  
 </mat-card-content>
 </mat-card>
