@@ -23,6 +23,7 @@ export class ClientComponent implements OnInit {
   clientes: Client[] = [];
   contratos: Contrat[] = [];
   depCliente: Client | null = null;
+  ciContrat: string[] = [];
 
   constructor(
     private clienteService: ClientService,
@@ -38,8 +39,9 @@ export class ClientComponent implements OnInit {
       .subscribe((co) => this.contratos = co);
   }
 
-  getContratos(ci: Client): Contrat[] {
-    return Array.isArray(ci.contrato) && typeof ci.contrato[0] !== 'string' ? ci.contrato as Contrat[] : [];
+  getContratos(cliente: any){
+    this.ciContrat = cliente.contratos || [];
+    return this.ciContrat;
   }
 
   save() {

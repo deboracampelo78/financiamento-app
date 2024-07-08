@@ -37,7 +37,7 @@
           <div>
             <mat-chip>Cpf: {{ci.cpf}}</mat-chip> -
             <mat-chip>Nome: {{ci.name}}</mat-chip> -
-            <mat-chip *ngFor="let co of getContratos(ci)">Contratos: {{co.name}}</mat-chip>
+            <mat-chip *ngFor="let co of getContratos(ci)">Contratos: {{ciContrat}}</mat-chip>
             <button mat-icon-button color="accent" (click)="delete(ci)">
               <mat-icon>delete</mat-icon>
             </button>
