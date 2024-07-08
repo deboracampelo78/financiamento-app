@@ -1,76 +1,41 @@
 <mat-card fxFlex>
-    <mat-card-title>Formulário de Contrato </mat-card-title>
-<mat-card-content> 
-    <div fxLayout="column" fxLayoutAlign="sapace-between">
-        <mat-form-field>
-            <input matInput [(ngModel)]="name" placeholder="Título do Contrato">
-          </mat-form-field>
-          
-          <mat-form-field>
-            <mat-label>Contrato em Atraso?</mat-label>
-            <mat-select [(ngModel)]="ematraso" placeholder="Selecione">
-              <mat-option value="Sim">Sim</mat-option>
-              <mat-option value="Não">Não</mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-          <mat-form-field>
-            <mat-label>Contrato no Prazo?</mat-label>
-            <mat-select [(ngModel)]="noprazo" placeholder="Selecione">
-              <mat-option value="Sim">Sim</mat-option>
-              <mat-option value="Não">Não</mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-          <mat-form-field>
-            <mat-label>Contrato foi Pago?</mat-label>
-            <mat-select [(ngModel)]="pago" placeholder="Selecione">
-              <mat-option value="Sim">Sim</mat-option>
-              <mat-option value="Não">Não</mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-          <mat-form-field>
-            <mat-label>Contrato foi Cancelado?</mat-label>
-            <mat-select [(ngModel)]="cancelado" placeholder="Selecione">
-              <mat-option value="Sim">Sim</mat-option>
-              <mat-option value="Não">Não</mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-        <div fxLayout="row">
-            <button mat-raised-button color="primary" (click)="save()">Salvar</button>
-            <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
-        </div>
-    </div>
-
-    <mat-list>
-      <h3 mat-subheader>Contratos</h3>
-      <ng-container *ngFor="let co of contratos">
-          <mat-list-item>
-              <div>
-                  <mat-chip>Título {{co.name}}</mat-chip> -
-                  <mat-chip>Atrasado? {{co.ematraso}}</mat-chip> -
-                  <mat-chip>Prazo? {{co.noprazo}}</mat-chip> -
-                  <ng-container *ngIf="co.pago === 'Sim'; else notPaid">
-                      <mat-chip-option selected>Pago? {{co.pago}}</mat-chip-option> -
-                  </ng-container>
-                  <ng-template #notPaid>
-                      <mat-chip>Pago? {{co.pago}}</mat-chip> -
-                  </ng-template>
-                  <mat-chip>Cancelado? {{co.cancelado}}</mat-chip>
-                  <button mat-icon-button color="accent" (click)="delete(co)">
-                      <mat-icon>delete</mat-icon>
-                  </button>
-                  <button mat-icon-button color="primary" (click)="edit(co)">
-                      <mat-icon>edit</mat-icon>
-                  </button>
-              </div>
-          </mat-list-item>
-      </ng-container>
-  </mat-list>
-  
-  
-  
-</mat-card-content>
+  <mat-card-title>Formulário de Contrato</mat-card-title>
+  <mat-card-content>
+      <div fxLayout="column" fxLayoutAlign="space-between">
+          <div fxLayout="row">
+              <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+              <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+          </div>
+      </div><br>
+      <div>
+        <button mat-raised-button color="primary" (click)="FilterContratosPagos()">
+          {{ mostrarContratosPagos ? 'Mostrar Todos' : 'Mostrar Apenas Pagos' }}
+        </button><br>
+      </div>
+      <mat-list>
+          <h3 mat-subheader>Contratos</h3>
+          <ng-container *ngFor="let co of contratos">
+              <mat-list-item *ngIf="!mostrarContratosPagos || (mostrarContratosPagos && co.pago === 'Sim')">
+                  <div>
+                      <mat-chip>Título {{co.name}}</mat-chip> -
+                      <mat-chip [color]="co.ematraso === 'Sim' ? 'warn' : ''">Atrasado? {{co.ematraso}}</mat-chip> -
+                      <mat-chip>Prazo? {{co.noprazo}}</mat-chip> -
+                      <ng-container *ngIf="co.pago === 'Sim'; else notPaid">
+                          <mat-chip-option selected>Pago? {{co.pago}}</mat-chip-option> -
+                      </ng-container>
+                      <ng-template #notPaid>
+                          <mat-chip>Pago? {{co.pago}}</mat-chip> -
+                      </ng-template>
+                      <mat-chip>Cancelado? {{co.cancelado}}</mat-chip>
+                      <button mat-icon-button color="accent" (click)="delete(co)">
+                          <mat-icon>delete</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" (click)="edit(co)">
+                          <mat-icon>edit</mat-icon>
+                      </button>
+                  </div>
+              </mat-list-item>
+          </ng-container>
+      </mat-list>
+  </mat-card-content>
 </mat-card>

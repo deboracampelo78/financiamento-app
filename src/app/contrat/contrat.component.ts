@@ -14,6 +14,7 @@ export class ContratComponent implements OnInit {
   noprazo: string = '';
   pago: string = '';
   cancelado: string = '';
+  mostrarContratosPagos: boolean = false;
 
   contratos: Contrat[] = [];
   contratEdit: Contrat | undefined;
@@ -28,39 +29,38 @@ export class ContratComponent implements OnInit {
   }
 
   save() {
-  if (this.contratEdit) {
-    this.contratService.update({
-      _id: this.contratEdit._id,
-      name: this.name,
-      ematraso: this.ematraso,
-      noprazo: this.noprazo,
-      pago: this.pago,
-      cancelado: this.cancelado
-    }).subscribe(
-      (co) => {
-        this.notify('Updated!');
-      },
-      (err) => {
-        this.notify('Error from Edit');
-        console.log(err);
-      }
-    )
-  } else {
-    this.contratService.add({
-      name: this.name,
-      ematraso: this.ematraso,
-      noprazo: this.noprazo,
-      pago: this.pago,
-      cancelado: this.cancelado
-    }).subscribe(
-      (co) => {
-        this.clearFields();
-        this.notify('Inserted!');
-      },
-      (err) => console.error(err))
+    if (this.contratEdit) {
+      this.contratService.update({
+        _id: this.contratEdit._id,
+        name: this.name,
+        ematraso: this.ematraso,
+        noprazo: this.noprazo,
+        pago: this.pago,
+        cancelado: this.cancelado
+      }).subscribe(
+        (co) => {
+          this.notify('Updated!');
+        },
+        (err) => {
+          this.notify('Error from Edit');
+          console.log(err);
+        }
+      )
+    } else {
+      this.contratService.add({
+        name: this.name,
+        ematraso: this.ematraso,
+        noprazo: this.noprazo,
+        pago: this.pago,
+        cancelado: this.cancelado
+      }).subscribe(
+        (co) => {
+          this.clearFields();
+          this.notify('Inserted!');
+        },
+        (err) => console.error(err))
+    }
   }
-}
-
 
   clearFields() {
     this.name = '';
@@ -71,7 +71,7 @@ export class ContratComponent implements OnInit {
   }
 
   cancel() {
-
+    // Implement your cancel logic here
   }
 
   edit(co: Contrat) {
@@ -89,11 +89,13 @@ export class ContratComponent implements OnInit {
         () => this.notify('Removed!'),
         (err) => console.log(err)
       )
+  }
 
+  FilterContratosPagos() {
+    this.mostrarContratosPagos = !this.mostrarContratosPagos;
   }
 
   notify(msg: string) {
     this.snackBar.open(msg, "OK", { duration: 3000 });
   }
-
 }
