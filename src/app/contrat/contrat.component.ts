@@ -14,7 +14,7 @@ export class ContratComponent implements OnInit {
   noprazo: string = '';
   pago: string = '';
   cancelado: string = '';
-  mostrarContratosPagos: boolean = false;
+  showOnlyPaid: boolean = false; // Propriedade para controlar o filtro
 
   contratos: Contrat[] = [];
   contratEdit: Contrat | undefined;
@@ -91,8 +91,8 @@ export class ContratComponent implements OnInit {
       )
   }
 
-  FilterContratosPagos() {
-    this.mostrarContratosPagos = !this.mostrarContratosPagos;
+  toggleShowOnlyPaid() {
+    this.showOnlyPaid = !this.showOnlyPaid;
   }
 
   notify(msg: string) {
