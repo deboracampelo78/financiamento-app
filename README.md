@@ -26,7 +26,7 @@ Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli
     ```bash
     node app
     ```
-5. Dentro da pasta `Financiamento`, rode no Git Bash o seguinte comando:
+5. Dentro da pasta `Financiamento-app`, rode no Git Bash o seguinte comando:
     ```bash
     ng serve
     ```
