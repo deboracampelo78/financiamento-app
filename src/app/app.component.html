@@ -4,9 +4,13 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-card>
-  <div fxLayout="row" fxLayoutAlign="space-between stretch">
-    <app-client fxFlex="50"></app-client>
-    <app-contrat fxFlex="50"></app-contrat>  
-  </div>
-</mat-card>
+<mat-tab-group mat-stretch-tabs = "false"  mat-align-tabs = "start">
+  <mat-tab label="Geral">
+    <div>
+      <app-client fxFlex="50"></app-client>
+      <app-contrat fxFlex="50"></app-contrat>
+    </div>
+  </mat-tab>
+  <mat-tab label="Cliente"> <app-client fxFlex="50"></app-client></mat-tab>
+  <mat-tab label="Contrato"><app-contrat fxFlex="50"></app-contrat>  </mat-tab>
+</mat-tab-group>

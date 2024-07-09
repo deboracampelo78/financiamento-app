@@ -53,8 +53,8 @@
         <ng-container *ngFor="let co of contratos">
             <mat-list-item *ngIf="!showOnlyPaid || (showOnlyPaid && co.pago === 'Sim')">
                 <div>
-                    <mat-chip>Título {{co.name}}</mat-chip> -
-                    <mat-chip [color]="co.ematraso === 'Sim' ? 'warn' : ''">Atrasado? {{co.ematraso}}</mat-chip> -
+                    <mat-chip>{{co.name}}</mat-chip> -
+                    <mat-chip>Prazo? {{co.ematraso}}</mat-chip> - -
                     <mat-chip>Prazo? {{co.noprazo}}</mat-chip> -
                     <ng-container *ngIf="co.pago === 'Sim'; else notPaid">
                         <mat-chip-option selected>Pago? {{co.pago}}</mat-chip-option> -
