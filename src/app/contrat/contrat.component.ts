@@ -71,7 +71,11 @@ export class ContratComponent implements OnInit {
   }
 
   cancel() {
-    // Implement your cancel logic here
+    this.name = '';
+    this.ematraso = '';
+    this.noprazo = '';
+    this.cancelado = '';
+    this.pago = '';
   }
 
   edit(co: Contrat) {
