@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,14 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClientComponent } from './client/client.component';
 import { ContratComponent } from './contrat/contrat.component';
 import { ContractGridComponent } from './contract-grid/contract-grid.component';
-
+import { ClienteGridComponent } from './cliente-grid/cliente-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientComponent,
     ContratComponent,
-    ContractGridComponent
+    ContractGridComponent,
+    ClienteGridComponent
   ],
   imports: [
     BrowserModule,
@@ -26,13 +26,10 @@ import { ContractGridComponent } from './contract-grid/contract-grid.component';
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
