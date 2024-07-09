@@ -1,0 +1,56 @@
+<!-- contract-grid.component.html -->
+<mat-card fxFlex>
+    <mat-card-title>Lista de Contratos</mat-card-title><br>
+    <mat-card-content>
+      <button mat-raised-button color="accent" (click)="toggleShowOnlyPaid()">
+        {{ showOnlyPaid ? 'Mostrar Todos' : 'Mostrar Apenas Pagos' }}
+      </button><br><br>
+  
+      <table mat-table [dataSource]="filteredContratos" class="mat-elevation-z8" style="width: 100%;">
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let contrat"> {{contrat.name}} </td>
+        </ng-container>
+  
+        <!-- Em Atraso Column -->
+        <ng-container matColumnDef="ematraso">
+          <th mat-header-cell *matHeaderCellDef> Em Atraso </th>
+          <td mat-cell *matCellDef="let contrat"> {{contrat.ematraso}} </td>
+        </ng-container>
+  
+        <!-- No Prazo Column -->
+        <ng-container matColumnDef="noprazo">
+          <th mat-header-cell *matHeaderCellDef> No Prazo </th>
+          <td mat-cell *matCellDef="let contrat"> {{contrat.noprazo}} </td>
+        </ng-container>
+  
+        <!-- Pago Column -->
+        <ng-container matColumnDef="pago">
+          <th mat-header-cell *matHeaderCellDef> Pago </th>
+          <td mat-cell *matCellDef="let contrat"> {{contrat.pago}} </td>
+        </ng-container>
+  
+        <!-- Cancelado Column -->
+        <ng-container matColumnDef="cancelado">
+          <th mat-header-cell *matHeaderCellDef> Cancelado </th>
+          <td mat-cell *matCellDef="let contrat"> {{contrat.cancelado}} </td>
+        </ng-container>
+  
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let contrat">
+            <button mat-icon-button color="warn" (click)="delete(contrat)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  

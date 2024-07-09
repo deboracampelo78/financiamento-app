@@ -10,13 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ClientComponent } from './client/client.component';
 import { ContratComponent } from './contrat/contrat.component';
+import { ContractGridComponent } from './contract-grid/contract-grid.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientComponent,
-    ContratComponent
+    ContratComponent,
+    ContractGridComponent
   ],
   imports: [
     BrowserModule,
