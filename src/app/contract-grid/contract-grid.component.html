@@ -1,10 +1,10 @@
 <!-- contract-grid.component.html -->
 <mat-card fxFlex>
-    <mat-card-title>Lista de Contratos</mat-card-title><br>
+    <mat-card-title>Lista de Contratos</mat-card-title>
     <mat-card-content>
       <button mat-raised-button color="accent" (click)="toggleShowOnlyPaid()">
         {{ showOnlyPaid ? 'Mostrar Todos' : 'Mostrar Apenas Pagos' }}
-      </button><br><br>
+      </button>
   
       <table mat-table [dataSource]="filteredContratos" class="mat-elevation-z8" style="width: 100%;">
   
@@ -17,7 +17,7 @@
         <!-- Em Atraso Column -->
         <ng-container matColumnDef="ematraso">
           <th mat-header-cell *matHeaderCellDef> Em Atraso </th>
-          <td mat-cell *matCellDef="let contrat"> {{contrat.ematraso}} </td>
+          <td mat-cell *matCellDef="let contrat" [ngClass]="{'highlight': contrat.ematraso === 'Sim'}"> {{contrat.ematraso}} </td>
         </ng-container>
   
         <!-- No Prazo Column -->
@@ -42,6 +42,9 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let contrat">
+            <button mat-icon-button color="primary" (click)="edit(contrat)">
+              <mat-icon>edit</mat-icon>
+            </button>
             <button mat-icon-button color="warn" (click)="delete(contrat)">
               <mat-icon>delete</mat-icon>
             </button>
