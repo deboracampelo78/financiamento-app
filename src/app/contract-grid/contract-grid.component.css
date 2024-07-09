@@ -1,5 +1,9 @@
 /* contract-grid.component.css */
 .highlight {
-    background-color: rgb(250, 168, 4);
+    background-color: rgb(249, 75, 75);
+  }
+
+.highlightPago {
+    background-color: rgb(208, 245, 188);
   }
   
