@@ -12,7 +12,7 @@ import { ContratService } from '../contrat.service';
 export class ClienteGridComponent implements OnInit {
   clientes: Client[] = [];
   contratos: Contrat[] = [];
-  displayedColumns: string[] = ['cpf', 'name', 'contrato'];
+  displayedColumns: string[] = ['cpf', 'name', 'contrato', 'actions'];
 
   constructor(
     private clienteService: ClientService,
