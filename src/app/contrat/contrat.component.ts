@@ -14,7 +14,7 @@ export class ContratComponent implements OnInit {
   noprazo: string = '';
   pago: string = '';
   cancelado: string = '';
-  showOnlyPaid: boolean = false; // Propriedade para controlar o filtro
+  showOnlyPaid: boolean = false;
 
   contratos: Contrat[] = [];
   contratEdit: Contrat | undefined;

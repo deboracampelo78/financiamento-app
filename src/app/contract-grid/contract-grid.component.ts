@@ -1,4 +1,3 @@
-// contract-grid.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Contrat } from '../contrat';
 import { ContratService } from '../contrat.service';
@@ -28,7 +27,6 @@ export class ContractGridComponent implements OnInit {
   }
 
   edit(contrat: Contrat) {
-    // Logic for editing the contract
   }
 
   delete(contrat: Contrat) {
